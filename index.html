@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? ❤️</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        /* Custom Font Families */
+        .font-heading {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .font-body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.6;
+            animation: float 8s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Fade in animations */
+        .fade-in {
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Image hover effect */
+        .memory-image {
+            transition: transform 0.3s ease;
+        }
+
+        .memory-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hidden section */
+        .hidden-section {
+            display: none;
+            opacity: 0;
+        }
+
+        .show-section {
+            display: block;
+            animation: scaleIn 0.8s ease-out forwards;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* NO button movement */
+        .no-button {
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        /* Promises animation */
+        .promise-item {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInPromise 0.6s ease-out forwards;
+        }
+
+        @keyframes slideInPromise {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stagger animation delays */
+        .promise-item:nth-child(1) { animation-delay: 0.3s; }
+        .promise-item:nth-child(2) { animation-delay: 0.6s; }
+        .promise-item:nth-child(3) { animation-delay: 0.9s; }
+        .promise-item:nth-child(4) { animation-delay: 1.2s; }
+        .promise-item:nth-child(5) { animation-delay: 1.5s; }
+        .promise-item:nth-child(6) { animation-delay: 1.8s; }
+
+        /* Pulse animation for YES button */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+    </style>
+</head>
+<body class="font-body bg-gradient-to-b from-pink-50 to-rose-100 min-h-screen overflow-x-hidden">
+
+    <!-- Floating Hearts Container -->
+    <div id="hearts-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- Main Content -->
+    <div class="relative z-10">
+
+        <!-- 1. Hero Section -->
+        <section class="min-h-screen flex flex-col items-center justify-center px-4 text-center fade-in">
+            <h1 class="font-heading text-5xl md:text-7xl font-bold text-rose-600 mb-6">
+                Hey Sobina, my love ❤️
+            </h1>
+            <p class="font-body text-lg md:text-2xl text-gray-700 max-w-2xl">
+                Every moment with you is a treasure I hold close to my heart
+            </p>
+        </section>
+
+        <!-- 2. Memories Section -->
+        <section class="py-16 px-4 max-w-6xl mx-auto" id="memories-section">
+            <h2 class="font-heading text-4xl md:text-5xl font-bold text-rose-600 text-center mb-12">
+                Our Beautiful Moments
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Memory Card 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <img src="assets/images/photo1.jpg" alt="Memory 1" class="w-full h-64 object-cover memory-image">
+                    <p class="p-4 text-center text-gray-600 italic">Our first adventure together</p>
+                </div>
+
+                <!-- Memory Card 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <img src="assets/images/photo2.jpg" alt="Memory 2" class="w-full h-64 object-cover memory-image">
+                    <p class="p-4 text-center text-gray-600 italic">The day I knew you were the one</p>
+                </div>
+
+                <!-- Memory Card 3 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <img src="assets/images/photo3.jpg" alt="Memory 3" class="w-full h-64 object-cover memory-image">
+                    <p class="p-4 text-center text-gray-600 italic">Making memories we'll never forget</p>
+                </div>
+
+                <!-- Memory Card 4 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <img src="assets/images/photo4.jpg" alt="Memory 4" class="w-full h-64 object-cover memory-image">
+                    <p class="p-4 text-center text-gray-600 italic">Every smile tells our story</p>
+                </div>
+
+                <!-- Memory Card 5 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <img src="assets/images/photo5.jpg" alt="Memory 5" class="w-full h-64 object-cover memory-image">
+                    <p class="p-4 text-center text-gray-600 italic">Together is my favorite place to be</p>
+                </div>
+
+                <!-- Memory Card 6 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <img src="assets/images/photo6.jpg" alt="Memory 6" class="w-full h-64 object-cover memory-image">
+                    <p class="p-4 text-center text-gray-600 italic">Forever grateful for us</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Love Message Section -->
+        <section class="py-16 px-4 max-w-4xl mx-auto" id="message-section">
+            <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+                <p class="font-body text-lg md:text-xl text-gray-700 leading-relaxed text-center">
+                    From the moment I met you, my life changed in the most beautiful way.
+                    You bring joy to my days, warmth to my heart, and meaning to everything I do.
+                    Your smile lights up my world, your laughter is my favorite sound,
+                    and your love is the greatest gift I've ever received.
+                    With you, I've found my home, my best friend, and my forever.
+                </p>
+            </div>
+        </section>
+
+        <!-- 4. The Question Section -->
+        <section class="py-16 px-4 max-w-3xl mx-auto text-center hidden-section" id="question-section">
+            <h2 class="font-heading text-4xl md:text-6xl font-bold text-rose-600 mb-12">
+                Sobina, will you be my Valentine? 💘
+            </h2>
+
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <button id="yes-button" class="bg-rose-500 hover:bg-rose-600 text-white font-semibold text-xl px-12 py-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105">
+                    YES ❤️
+                </button>
+
+                <button id="no-button" class="no-button bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold text-xl px-12 py-4 rounded-full shadow-lg">
+                    NO 😅
+                </button>
+            </div>
+        </section>
+
+        <!-- 5. Final Message Section (Hidden Initially) -->
+        <section id="final-message" class="hidden-section py-16 px-4 max-w-4xl mx-auto text-center">
+            <div class="bg-gradient-to-r from-rose-400 to-pink-400 rounded-3xl shadow-2xl p-8 md:p-12 mb-8">
+                <h3 class="font-heading text-3xl md:text-5xl font-bold text-white mb-4">
+                    I love you forever ❤️
+                </h3>
+                <p class="font-body text-xl md:text-2xl text-white">
+                    I'm so lucky to have you. Happy Valentine's Day, my love!
+                </p>
+            </div>
+
+            <!-- My Promises to You -->
+            <div id="promises-section" class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 mt-8">
+                <h4 class="font-heading text-3xl md:text-4xl font-bold text-rose-600 mb-8">
+                    My Promises to You 💝
+                </h4>
+
+                <div class="space-y-6 text-left max-w-2xl mx-auto">
+                    <div class="promise-item flex items-start gap-4">
+                        <span class="text-3xl">💕</span>
+                        <p class="font-body text-lg text-gray-700">
+                            I promise to <strong>love you unconditionally</strong>, every single day, through all of life's ups and downs
+                        </p>
+                    </div>
+
+                    <div class="promise-item flex items-start gap-4">
+                        <span class="text-3xl">🌟</span>
+                        <p class="font-body text-lg text-gray-700">
+                            I promise to <strong>support your dreams</strong> and cheer you on in everything you do
+                        </p>
+                    </div>
+
+                    <div class="promise-item flex items-start gap-4">
+                        <span class="text-3xl">😊</span>
+                        <p class="font-body text-lg text-gray-700">
+                            I promise to <strong>make you laugh</strong> and bring joy to your days, even on the hardest ones
+                        </p>
+                    </div>
+
+                    <div class="promise-item flex items-start gap-4">
+                        <span class="text-3xl">🤝</span>
+                        <p class="font-body text-lg text-gray-700">
+                            I promise to <strong>be your best friend</strong>, your partner, and your safe place always
+                        </p>
+                    </div>
+
+                    <div class="promise-item flex items-start gap-4">
+                        <span class="text-3xl">🌈</span>
+                        <p class="font-body text-lg text-gray-700">
+                            I promise to <strong>create beautiful memories</strong> with you and cherish every moment we share
+                        </p>
+                    </div>
+
+                    <div class="promise-item flex items-start gap-4">
+                        <span class="text-3xl">♾️</span>
+                        <p class="font-body text-lg text-gray-700">
+                            I promise to <strong>choose you every day</strong>, for the rest of my life
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-8 text-center text-gray-600">
+            <p class="font-body">Made with ❤️ for Sobina, the love of my life</p>
+        </footer>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
